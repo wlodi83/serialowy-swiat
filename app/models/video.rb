@@ -11,18 +11,21 @@ class Video < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
 
   has_attached_file :photo, :styles => { :medium => "300x300\#", :mini => "200x200\#", :thumbnails => "100x100\#" }
+  #Validations
   validates_attachment_presence :photo                    
   validates_attachment_size :photo, :less_than => 5.megabyte
   validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png', 'image/gif']
-  #thinking_sphinx
-  define_index do
-    indexes title 
-  end 
   validates :title, :presence => true
   validates :link, :presence => true,
 		   :uniqueness => true,
                    :format => { :with => /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix }
- 
+  #Scopes
+  scope :five_new, where(:published => true).limit(5).order("published_at DESC")
+
+  #thinking_sphinx
+  define_index do
+    indexes title 
+  end 
   # redis
   def self.set_hits_counter(video_id)
    begin
@@ -60,6 +63,7 @@ class Video < ActiveRecord::Base
   def update_published_at
     self.published_at = Time.now if published == true  
   end
+
   def published?
     published_at.present?
   end

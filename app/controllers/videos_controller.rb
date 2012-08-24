@@ -29,6 +29,7 @@ class VideosController < ApplicationController
       @category_id = params[:category_id]
       @category_name = Category.find(@category_id).name
       @root_name = Category.find(@category_id).root.name
+      @five_new_videos = Video.five_new
       respond_to do |format|
         format.html #index.html.erb
         format.xml { render :xml => @videos }
@@ -39,12 +40,14 @@ class VideosController < ApplicationController
       @category_id = params[:category_id]
       @category_name = Category.find(@category_id).name
       @root_name = Category.find(@category_id).root.name
+      @five_new_videos = Video.five_new
       respond_to do |format|
         format.html #index.html.erb
         format.xml { render :xml => @videos }
       end   
     else
       @videos = Video.where(:published => true, :mainpage => true).order("published_at DESC").paginate(:page => params[:page], :per_page => 30)
+      @five_new_videos = Video.five_new
       respond_to do |format|
         format.html # index.html.erb
         format.xml  { render :xml => @videos }

@@ -1,12 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :load_categories, :load_videos, :load_titles, :video_first, :five_top_videos, :five_new_videos, :five_new_comments
+  before_filter :load_categories, :load_videos, :load_titles, :video_first, :five_top_videos, :five_new_comments
   def five_new_comments
     @five_new_comments = Comment.limit(5).order("created_at DESC")
-  end
-
-  def five_new_videos
-    @five_new_videos = Video.where(:published => true).limit(5).order("published_at DESC") 
   end
 
   def five_top_videos
