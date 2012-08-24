@@ -1,0 +1,17 @@
+<h3 id="loud">Users</h3>
+<% @users.each do |user| %>
+<%= image_tag user.avatar.url(:thumb), :class => "user_avatar" %>
+<%= link_to user.name, user %> <span class="vertical_line">|</span>
+<%= link_to user.email, user %>
+   <% if current_user.try(:admin?) %> <span class="vertical_line">|</span>
+   <% if user.admin? %>
+     <%= link_to "remove admin role", remove_admin_url(:id => user.id, :format => :js), :remote => true, :id => "remove_admin_link_#{user.id}", :method => :post %>
+     <%= link_to "add admin role", add_admin_url(:id => user.id, :format => :js), :remote => true, :id => "add_admin_link_#{user.id}", :style => 'display:none', :method => :post %>
+   <% else %>
+     <%= link_to "add admin role", add_admin_url(:id => user.id, :format => :js), :remote => true, :id => "add_admin_link_#{user.id}", :method => :post %>
+     <%= link_to "remove admin role", remove_admin_url(:id => user.id, :format => :js), :remote => true, :id => "remove_admin_link_#{user.id}", :style => 'display:none', :method => :post %>
+   <% end %>
+   <br />
+   <% end %>
+   <hr />
+<% end %>

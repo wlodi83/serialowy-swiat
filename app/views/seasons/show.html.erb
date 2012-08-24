@@ -1,0 +1,15 @@
+<h3>Tytuł: <%= @video.title.sub(/(\s\((ENG|eng|Eng)\)\sS\d+E\d+|\s\((PL|Pl|pl)\)\sS\d+E\d+|\sS\d+E\d+)/, '') %></h3>
+<h3>Sezon <%= @season.number %></h3>
+<hr />
+<% @videos.each do |video| %>
+ <h4><%= link_to video.title, video, :style => "color: blue;text-decoration: none;" %></h4>
+ <%= link_to image_tag(video.photo.url(:thumbnails)), video, :style => "float:right;margin-right:20px;" %>
+ <div>
+ <p>Odcinek: <b><%= video.episode %></b></p>
+ <p>Dodany przez: <b><%= video.user.name %></b></p>
+ <p>Dodano: <b><%= video.published_at.strftime("%Y-%m-%d %H:%M") %></b></p>
+ <p>Średnia ocen: <b><%= video.average_rating.nan? ? 0 : video.average_rating %></b></p>
+ <p>Liczba wyświetleń: <b><%= Video.current_counter_hits(video.id) %></b></p>
+ </div>
+<hr />
+<% end %>

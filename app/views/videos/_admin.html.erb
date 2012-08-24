@@ -1,0 +1,11 @@
+<hr id="hr_show"/>
+<span class="count_of_videos">Liczba dodanych Seriali i Filmów do systemu: <b><%= @videos.size %></b></span>
+<hr id="hr_show"/>
+<% for video in @videos %>
+<h3 id="loud"><%= link_to video.title, video %></h3> 
+<span class="admin_actions"><%= link_to 'Edytuj', edit_video_path(video) %> 
+| <%= link_to 'Usuń Serial', video, :confirm => "Czy napewno chcesz usunąć serial lub film?", :method => :delete %>
+</span>
+<hr id="hr_show"/>
+<% end %>
+<%= will_paginate @videos %>

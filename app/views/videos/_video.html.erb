@@ -1,0 +1,9 @@
+<%= div_for video do %>
+  <h3 class="loud">
+    <%= link_to video.title, video %> 
+  </h3>
+  <% if !(video.season.nil? and video.episode.nil?) %>
+  <p>Sezon <%= video.season.number %><br />Odcinek <%= video.episode %></p>
+  <% end %>
+  <p><%= link_to image_tag(video.photo.url(:mini)), video %></p> <br />
+  <% end %>

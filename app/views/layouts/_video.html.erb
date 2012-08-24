@@ -1,0 +1,8 @@
+<div class="image_carousel">
+<div id="carousel">
+<% @carousel_videos.each do |video| %>
+   <div><%= link_to image_tag(video.photo.url(:thumbnails)), video %></div>
+<% end %>
+</div>
+<div class="clearfix"></div>
+</div>

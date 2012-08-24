@@ -1,0 +1,34 @@
+<h3>Save Your subscriptions</h3>
+<p>Count of your's subscriptions: <span id="counts_of_subscriptions"><%= render :partial => 'counts_of_subscriptions' %></span></p>
+<hr id="hr_show"/>
+<ul id="ul_root">
+<% @categories.each do |root| %>
+<li>
+  <%= label_tag root.id, root.name %>
+  <% if !current_user.has_subscription?(root.id) %>
+  <%= link_to image_tag("/images/plus.png", :id => "img_plus"), add_subscription_url(:id => root.id, :format => :js), :remote => true, :id => "add_subscription_#{root.id}", :method => :post %>
+  <%= link_to image_tag("/images/minus.png", :id => "img_minus"), remove_subscription_url(:id => root.id, :format => :js), :remote => true, :id => "remove_subscription_#{root.id}", :style => "display:none;", :method => :post %>
+  <% else %>
+  <%= link_to image_tag("/images/minus.png", :id => "img_minus"), remove_subscription_url(:id => root.id, :format => :js), :remote => true, :id => "remove_subscription_#{root.id}", :method => :post %>
+  <%= link_to image_tag("/images/plus.png", :id => "img_plus"), add_subscription_url(:id => root.id, :format => :js), :remote => true, :id => "add_subscription_#{root.id}", :style => "display:none;", :method => :post %> 
+  <% end %> 
+  <% if root.children.size > 0 %>
+  <ul id="ul_children">
+    <% root.children.each do |children| %>
+  <li>
+    <%= label_tag children.id, children.name %> 
+    <% if !current_user.has_subscription?(children) %>
+    <%= link_to image_tag("/images/plus.png", :id => "img_plus"), add_subscription_url(:id => children.id, :format => :js), :remote => true, :id => "add_subscription_#{children.id}", :method => :post %>
+    <%= link_to image_tag("/images/minus.png", :id => "img_minus"), remove_subscription_url(:id => children.id, :format => :js), :remote => true, :id => "remove_subscription_#{children.id}", :style => "display: none;", :method => :post %>
+    <% else %>
+    <%= link_to image_tag("/images/minus.png", :id => "img_minus"), remove_subscription_url(:id => children.id, :format => :js), :remote => true, :id => "remove_subscription_#{children.id}", :method => :post %>
+    <%= link_to image_tag("/images/plus.png", :id => "img_plus"), add_subscription_url(:id => children.id, :format => :js), :remote => true, :id => "add_subscription_#{children.id}", :style => "display: none;", :method => :post %>
+    <% end %>
+  </li>
+    <% end %>
+  </ul>
+  <% end %>
+</li>
+<% end %> 
+</ul>
+<hr id="hr_show"/>

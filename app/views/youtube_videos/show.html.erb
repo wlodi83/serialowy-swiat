@@ -1,0 +1,10 @@
+<fieldset>
+<legend style="color: white;">Film z YouTube</legend>
+<h3 id="h3_show"><%= @youtube_video.title %></h3>
+<iframe id="facebook_like_show" src="http://www.facebook.com/plugins/like.php?app_id=130404860378317&amp;href=<%= request.url%>&amp;send=false&amp;layout=button_count&amp;width=100&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font=arial&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe>
+<hr id="hr" />
+<center>
+<%= raw @youtube_video.yt_video_embed %>
+</center>
+<p><%= @youtube_video.description %></p>
+</fieldset>

@@ -1,0 +1,9 @@
+<html>
+<body>
+<p>
+  New Video was added to <b>TV Serien Online</b>:<br />
+  Title: <i><%= @video.title %></i>
+  Link: <%= link_to @video.title, video_url(@video, :host => 'tv-serienonline.de') %>
+</p>
+</body>
+</html>

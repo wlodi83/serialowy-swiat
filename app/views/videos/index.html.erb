@@ -1,0 +1,12 @@
+<% title "Serialowy Świat - Najlepsze seriale i filmy" %>
+<% if @youtube_videos.nil? %>
+<div id="videos">
+  <%= render @videos %>
+</div>
+<div style="text-align: center"><%= will_paginate @videos %></div>
+<% else %>
+<div id="youtube_videos">
+  <%= render @youtube_videos %>
+</div>
+<div style="text-align: center"><%= will_paginate @youtube_videos %></div>
+<% end %>

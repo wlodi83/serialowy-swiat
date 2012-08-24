@@ -1,0 +1,3 @@
+$('#remove_subscription_<%= @subscription.id %>').hide();
+$('#add_subscription_<%= @subscription.id %>').show();
+$("#counts_of_subscriptions").html("<%= escape_javascript( render(:partial => 'counts_of_subscriptions') ) %>");

@@ -1,0 +1,8 @@
+<span style="color:white;font-weight: bold;">Tytuly &dArr;</span>
+<div id="navcontainer">
+<ul id="navlist">
+<% for video in @videos_titles do %>
+<li><%= link_to video.title.sub(/(\s\((ENG|eng|Eng)\)\sS\d+E\d+|\s\((PL|Pl|pl)\)\sS\d+E\d+|\sS\d+E\d+)/, ''), video_path(video)  %></li>
+<% end %>
+</ul>
+</div>

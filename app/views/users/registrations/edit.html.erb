@@ -1,0 +1,23 @@
+<h3 id="loud">Edycja <%= resource_name.to_s.humanize %></h3>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+  <p><%= f.label :imie %><br />
+  <%= f.text_field :name %></p>
+  <p><%= f.label :email %><br />
+  <%= f.text_field :email %></p>
+
+  <p><%= f.label :haslo %> <i>(leave blank if you don't want to change it)</i><br />
+  <%= f.password_field :password %></p>
+
+  <p><%= f.label :potwierdzenie_hasla %><br />
+  <%= f.password_field :password_confirmation %></p>
+
+  <p><%= f.label :biezace_haslo %> <i>(we need your current password to confirm your changes)</i><br />
+  <%= f.password_field :current_password %></p>
+  <p><%= f.submit "Zapisz" %></p>
+<% end %>
+
+<h3>Anuluj moje konto</h3>
+
+<p>Niezadowolony? <%= link_to "Anuluj moje konto", registration_path(resource_name), :confirm => "Na pewno chcesz anulowac swoje konto?", :method => :delete %>.</p>

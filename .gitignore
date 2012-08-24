@@ -1,0 +1,9 @@
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/**/*
+public/system/photos/*
+public/system/avatars/*
+config/database.yml
+config/email.yml
+config/initializers/devise.rb

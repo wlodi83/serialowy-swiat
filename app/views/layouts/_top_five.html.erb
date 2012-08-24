@@ -1,0 +1,15 @@
+<fieldset style="padding: 5px;">
+<legend style="color: white; text-size: 12px;">Najczęściej oglądane</legend>
+<span style="color: white">
+<div style="background-color: #302226; padding: 1px">
+<% i = 1 %>
+<% @five_videos_table.each do |video| %>
+<%= i %>. <%= link_to video.title, video, :style => "color: yellow;" %>
+- <%= Video.current_counter_hits(video.id).to_i %> odsłon
+<%= image_tag(video.photo.url(:thumbnails), :width => '100', :height => '100') %>
+<hr style="color: #302226;"/>
+<% i += 1 %>
+<% end %>
+</div>
+</span>
+</fieldset>

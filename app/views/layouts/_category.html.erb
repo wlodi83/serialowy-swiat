@@ -1,0 +1,13 @@
+<ul id="topnav">
+<% for category in @categories do %>
+<li><%= link_to category.name, category_videos_url(:category_id => category) %>
+<% if category.children.size > 0 %>
+<span>
+<% category.children.each do |children| %>
+<%= link_to children.name, category_videos_url(:category_id => children) %> |
+<% end %>
+</span>
+<% end %>
+</li>
+<% end %>
+</ul>

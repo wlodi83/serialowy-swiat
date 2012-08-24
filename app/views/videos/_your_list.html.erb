@@ -1,0 +1,9 @@
+<hr id="hr_show"/>
+<span class="count_of_videos">Count of yours added videos: <b><%= @videos.size %></b></span>
+<hr id="hr_show"/>
+<% for video in @videos %>
+<h3 id="h3_list"><%= link_to video.title, video %></h3>
+<%= image_tag video.photo.url(:medium) %>
+<hr id="hr_show"/>
+<% end %>
+<%= will_paginate @videos %>

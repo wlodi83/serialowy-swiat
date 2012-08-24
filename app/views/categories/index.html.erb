@@ -1,0 +1,19 @@
+<h3 id="loud">Category list</h3>
+<% @categories.each do |category| %>
+<span class="category_root"><%= category.name %></span>
+<span class="actions">
+<%= link_to 'Show', category %> | 
+<%= link_to 'Edit', edit_category_path(category) %> | 
+<%= link_to 'Destroy', category, :confirm => 'Are you sure?', :method => :delete %>
+</span>
+<br />
+<% category.children.each do |children| %>
+<span class="category_children"><%= children.name %></span>
+<span class="actions">
+<%= link_to 'Show', children %> |
+<%= link_to 'Edit', edit_category_path(children) %> |
+<%= link_to 'Destroy', children, :confirm => 'Are you sure?', :method => :delete %>
+</span>
+<br />
+<% end %>
+<% end %>

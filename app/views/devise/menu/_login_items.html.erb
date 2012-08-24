@@ -1,0 +1,10 @@
+<% if user_signed_in? %>
+  <li>
+  Zalogowany <span><%= current_user.email %></span>. Nie ty?
+  <%= link_to('Wyloguj sie', destroy_user_session_path) %>
+  </li>        
+<% else %>
+  <li>
+  <%= link_to('Zaloguj sie', new_user_session_path)  %>  
+  </li>
+<% end %>

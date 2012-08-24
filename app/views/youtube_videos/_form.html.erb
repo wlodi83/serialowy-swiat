@@ -1,0 +1,68 @@
+<%= form_for(@youtube_video) do |f| %>
+  <% if @youtube_video.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@youtube_video.errors.count, "error") %> prohibited this youtube_video from being saved:</h2>
+
+      <ul>
+      <% @youtube_video.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :tytuł %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :opis %><br />
+    <%= f.text_area :description, :cols => 10, :rows => 5 %>
+  </div>
+  <div class="field">
+    <%= f.label :embed_kod_do_filmu %><br />
+    <%= f.text_field :yt_video_embed %>
+  </div>
+  <div class="field">
+    <%= f.label :kategorie %><br />
+   <ul>
+    <% Category.roots.each do |category| %>
+      <li>
+      <%= check_box_tag 'youtube_video[category_ids][]', category.id, @youtube_video.category_ids.include?(category.id), :id => dom_id(category) %>
+      <%= label_tag dom_id(category), category.name, :class => "check_box_label" %>
+      </li>
+      <ul>
+      <% if category.children.size > 0 %>
+      <% category.children.each do |children| %>
+      <li>
+      <%= check_box_tag 'youtube_video[category_ids][]', children.id, @youtube_video.category_ids.include?(children.id), :id => dom_id(children) %>
+      <%= label_tag dom_id(children), children.name, :class => "check_box_label" %>
+      <ul>
+      <% if children.children.size > 0 %>
+      <% children.children.each do |subchildren| %>
+      <%= check_box_tag 'youtube_video[category_ids][]', subchildren.id, @youtube_video.category_ids.include?(subchildren.id), :id => dom_id(subchildren) %>
+      <%= label_tag dom_id(subchildren), subchildren.name, :class => "check_box_label" %>
+      <% end %>
+      <% end %>
+      </ul>
+      </li>
+      <% end %>
+      <% end %>
+      </ul>
+    <% end %>
+   </ul>
+  </div>
+  <% if current_user.try(:admin?) %>
+  <div class="field">
+    <%= f.label :publikować? %><br />
+    <%= f.check_box :published %>
+  </div>
+  <div class="field">
+    <%= f.label :publikować_na_pierwszej_stronie? %><br />
+    <%= f.check_box :mainpage %>
+  </div>
+  <% end %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

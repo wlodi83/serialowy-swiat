@@ -1,0 +1,13 @@
+<%= form_tag(copyright_violation_video_path(@video), :id => 'copyright_violation_form', :style => 'display:none') do %>
+<div class="field">
+<%= label_tag :name, 'Your name' %><br />
+<%= text_field_tag :name %>
+</div>
+<div class="field>
+<%= label_tag :text, 'Message about copyright violation' %><br />
+<%= raw text_field_tag :text %>
+</div>
+<div class="actions">
+<%= submit_tag 'Send' %> or <%= link_to 'Cancel', '#copyright_violation_link', :onclick => "$('#copyright_violation_form').slideUp()", :class => "cancel_link" %>
+</div>
+<% end %>

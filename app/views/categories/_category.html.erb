@@ -1,0 +1,14 @@
+<br />
+<span style="color:white;font-weight: bold;">Kategorie &dArr;</span>
+<% for category in @categories do %>
+<ul id="categories">
+<li><%= link_to category.name, category_videos_url(:category_id => category) %> <span>(<%= category.videos.size + category.youtube_videos.size %>)</span></li>
+<% if category.children.size > 0 %>
+<ul id="subcategories">
+<% category.children.each do |children| %>
+<li><%= link_to children.name, category_videos_url(:category_id => children) %> <span>(<%= children.videos.size %>)</span></li>
+<% end %>
+</ul>
+<% end %>
+</ul>
+<% end %>

@@ -1,0 +1,56 @@
+<% content_for(:scripts) do %>
+<%= javascript_include_tag 'rating_ballot' %>
+<% end %>
+<h3 id="h3_show"><%= @video.title %></h3>
+<% if current_user %>
+<span style="margin-left:30px;float:left;color:white;text-decoration:none;">
+<%= link_to "Dodaj Podobny", similar_video_path %>
+</span>
+<% end %>
+<iframe id="facebook_like_show" src="http://www.facebook.com/plugins/like.php?app_id=130404860378317&amp;href=<%= request.url%>&amp;send=false&amp;layout=button_count&amp;width=100&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font=arial&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe>
+<hr/>
+<div style="align:center;background-color: silver;width:100%;height:100%;">
+<div style="align:center;padding:20px;">
+<center>
+<SCRIPT TYPE="text/javascript" src="http://files.netsales.pl/kody/writeObject.js"></SCRIPT>
+<SCRIPT LANGUAGE=JavaScript>
+var Baner_File="http://files.netsales.pl/programy/607_testuj_perfumy/perfumy_300x250.swf";
+var Baner_FileBase=0;
+var Baner_URL="http://server.netsales.pl/z/23860/CD8537/";
+var Baner_Special="?clickTag="+escape(Baner_URL);
+var Baner_Width=300;
+var Baner_Height=250;
+var Baner_Wmode="#FFFFFF";
+var Baner_Fdcdwc=1;
+</SCRIPT>
+<SCRIPT TYPE="text/javascript" src="http://files.netsales.pl/kody/bill.js"></SCRIPT>
+<img src="http://server.netsales.pl/42/8537/23860/" border="0" />
+<br />
+<%= link_to ">>> Kliknij tutaj i obejrzyj serial <<<", @video.link, :target => '_blank', :confirm => "Klikajac przycisk \"OK\" opuszczasz strone SerialowySwiat.pl", :style => "color: yellow; text-decoration: none;" %>
+</center>
+</div>
+</div>
+<hr id="hr_show"/>
+<% if !(@video.season.nil? and @video.episode.nil?) %>
+<%= next_videos(@video) %>
+<hr id="hr_show"/>
+<%= previous_videos(@video) %>
+<hr id="hr_show"/>
+<%= video_seasons(@video) %>
+<hr id="hr_show"/>
+<% end %>
+<iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FSerialowy-%25C5%259Awiat%2F246594375351874&amp;width=650&amp;colorscheme=light&amp;show_faces=true&amp;border_color&amp;stream=false&amp;header=false&amp;height=258" scrolling="no" frameborder="0" style="border:none; overflow:hidden; margin-left: 10px; width:650px; height:258px;" allowTransparency="true"></iframe>
+<hr id="hr_show"/>
+<p>Serial/Film obejrzano <%= Video.current_counter_hits(@video.id) %> razy</p>
+<%= link_to 'Wyślij email z linkiem do znajomego', '#email_link', :onclick => "$('#notify_friend_form').slideDown()", :class => "email_link" %>
+<%= render 'notify_friend' %>
+<hr id="hr_show"/>
+<%= link_to 'Zgłoś naruszenie praw autorskich!', '#copyrigh_violation', :onclick => "$('#copyright_violation_form').slideDown()", :class => "copyright_violation_link" %>
+<%= render 'copyright_violation' %>
+<hr id="hr_show"/>
+<h3>Komentarze</h3>
+<%= link_to "Dodaj komentarz", new_video_comment_path(@video, :format => :js), :remote => true, :id => 'new_comment_link' %>
+<br /><br />
+<div id="comments">
+  <%= render @video.comments %>
+</div>

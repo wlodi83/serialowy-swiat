@@ -1,0 +1,9 @@
+<center>
+<% div_for youtube_video do %>
+  <h3 class="loud">
+    <%= link_to youtube_video.title, youtube_video %>
+  </h3>
+  <p><%= raw youtube_video.yt_video_embed %></p>
+  <hr id="hr" />
+<% end %>
+</center>

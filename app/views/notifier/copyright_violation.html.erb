@@ -1,0 +1,14 @@
+<html>
+<body>
+<p>
+Person, <%= @sender_name %>,
+ thinks you make a copyright violation.
+</p>
+<p>
+Message: <%= @sender_text %>
+</p>
+<p>
+ Come check all the information about <strong><%= @video.title %></strong> at <%= video_url(@video, :host => 'tv-serienonline.de') %>
+</p>
+</body>
+</html>

@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteRule ^$ /vr_display_022205.php?filename=index.html [L,NC]
+RewriteRule ^(.*)\.html$ /vr_display_022205.php?filename=$1.html [L,NC]
+RewriteRule ^(.*)\.htm$ /vr_display_022205.php?filename=$1.htm [L,NC]

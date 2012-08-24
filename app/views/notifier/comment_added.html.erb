@@ -1,0 +1,8 @@
+<html>
+<body>
+<p> 
+  Someone added a comment to one of your videos <i><%= @video.title %></i>.
+  Go read the comment: <%= link_to @video.title, video_url(@video, :host => 'tv-serienonline.de') %>.
+<p>
+</body>
+</html>

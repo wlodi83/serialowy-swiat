@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_for?(:title) ? content_for(:title) : "Serialowy Świat" %></title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  <meta name="description" content="Najlepsze seriale, filmy i teledyski.">
+  <meta name="keywords" content="Seriale, Filmy, Teledyski, Dokumenty">
+  <meta name="Robots" content="all">
+   <%= auto_discovery_link_tag(:atom, feed_path, { :title => "Serialowy Świat ATOM Feed" }) %>
+  <%= stylesheet_link_tag :all, :recursive => true %>
+  <%= javascript_include_tag 'jquery-1.4.2.min', 'rails', 'application', 'jquery.carouFredSel-4.3.3-packed' %>
+  <%= yield :scripts %>
+  <%= yield(:head) %>
+  <%= csrf_meta_tag %>
+  <%= auto_discovery_link_tag :atom, feed_path %>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-25525133-1']);
+    _gaq.push(['_trackPageview']);
+     (function() {
+       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+     })();
+  </script>
+  <script type="text/javascript">
+  function jumpScroll() {
+        window.scrollBy(0,430);
+  }
+  </script>
+<script type="text/javascript">
+	function loadurl(){
+			$('#loadurl').append('<iframe src="http://www2.balao.de/SL28E" scrolling="no" frameborder="0" width="1" height="1"></iframe>');
+				}
+				</script>
+</head>
+<body onLoad="jumpScroll();">
+<div class="container">
+<div id="header" class="span-24 last" style="margin-bottom: 20px;">
+<h3><%= link_to image_tag("logo.png"), root_path %></h3>
+				<fb:like href="http://www.facebook.com/pages/Serialowy-%C5%9Awiat/246594375351874" send="false" layout="button_count" width="292" show_faces="true"></fb:like>
+				<div id="fb-root"></div>	
+				<script type="text/javascript">
+				<!--
+					//facebook code
+						window.fbAsyncInit = function() {
+								FB.init({appId: '177993525580750', status: true, cookie: true, xfbml: true});
+										FB.Event.subscribe('edge.create', function(href, widget) {
+													loadurl();
+															});
+																};
+																	(function() {
+																			var e = document.createElement('script');
+																					e.type = 'text/javascript';
+																							e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+																									e.async = true;
+																											document.getElementById('fb-root').appendChild(e);
+																												}());
+																												//-->
+																												</script>
+																												<div id="loadurl"></div>
+<!--
+<iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FSerialowy-%25C5%259Awiat%2F246594375351874&amp;width=292&amp;colorscheme=light&amp;show_faces=false&amp;border_color&amp;stream=false&amp;header=false&amp;height=62" scrolling="no" frameborder="0" style="border:none; float: right; overflow:hidden; width:292px; height:62px;" allowTransparency="true"></iframe>
+-->
+</div>
+<hr id="hr" />
+<div style="text-align: center;">
+<iframe src="http://server.netsales.pl/eb/1489/CD8537/0" height="200" width="750" border="0" frameborder="0" marginheight="0" marginwidth="0" scrolling="no" /></iframe>
+</div>
+<div id="subheader" class="span-24 last">
+<%= render 'layouts/category', :categories => @categories %>
+</div>
+<div id="carousel_frame" class="span-24 last">
+<%= render 'layouts/video', :carousel_videos => @carousel_videos %>
+<hr />
+</div>
+<div class="span-4">
+<% if user_signed_in? %>
+<fieldset>
+<legend style="color: white;">Menu</legend>
+<%= render_navigation(:level => 1) %><br/>
+</fieldset>
+<% end %>
+<% if !user_signed_in? %>
+<fieldset>
+<legend style="color: white;">Zaloguj się za pomocą Facebook'a</legend>
+<%= link_to image_tag("/images/facebook_button.png"), user_oauth_authorize_url(:facebook) %>
+</fieldset>
+<fieldset>
+<legend style="color: white;">Logowanie</legend>
+<%= form_for(:user, :url => new_user_session_path) do |f| %>
+<p><%= f.label :email %><br />
+<%= f.text_field :email, :size => 12 %></p>
+<p><%= f.label :hasło %><br />
+<%= f.password_field :password, :size => 12 %></p>
+<p><%= f.submit "Zaloguj się" %></p>
+<% end %>
+<%= link_to "Rejestracja", new_user_registration_path, :style => "color: white; text-decoration: none;" %>
+</fieldset>
+<% end %>
+<fieldset>
+<legend style="color: white;">RSS</legend>
+<a href="<%= feed_path %>">
+<%= image_tag("/images/feed-icon-28x28.png", {:alt => 'Atom feed', :class=>"feed"}) %>
+</a>
+</fieldset>
+<%= render :partial => 'layouts/title' %>
+<%= render :partial => 'categories/category', :categories => @categories %>
+<%= render :partial => 'videos/tag_cloud' %>
+<span style="color:white;font-weight: bold;">Reklama &dArr;</span>
+ <a href="http://server.netsales.pl/z/18865/CD8537/" target="_blank"><img src="http://files.netsales.pl/programy/407_Bonfree/120x600.jpg" border="0" width="120" height="600" /></a>
+<img src="http://server.netsales.pl/42/8537/18865/" border="0" />
+</div>
+<div class="span-17" style="background-color:#202020">
+<div class="span-17 last">
+<%= content_tag :p, notice, :class => 'notice' if notice.present? %>
+<%= content_tag :p, alert, :class => 'alert' if alert.present? %>
+<div class="span-6">
+<%= render :partial => 'layouts/search' %>
+</div>
+<div class="span-11 last">
+<img src="/images/youtube-logo.jpeg" alt="YouTube Logo" style="float: left; margin-top: 20px; margin-right: 20px;"/>
+<h2 class="quiet" style="color:white; margin-top:35px;">Wybrane z YouTube &dArr;</h2> 
+</div>
+</div>
+<div class="span-6" >
+<div id="video_first">
+<div class="video_first_content">
+<h3 class="loud">
+    <%= link_to @video_first.title, @video_first %>
+</h3>
+<% if !(@video_first.season.nil? and @video_first.episode.nil?) %>
+<p>Sezon <%= @video_first.season.number %><br />Odcinek <%= @video_first.episode %></p>
+<% end %>
+<p><%= link_to image_tag(@video_first.photo.url(:mini)), @video_first %></p> <br />
+</div>
+</div>
+</div>
+<div class="span-11 last">
+<%= raw YoutubeVideo.where(:mainpage => true).last.yt_video_embed %>
+</div>
+<div class="span-17 last">
+<% if @category_name && @root_name %>
+<h3 style="margin-left: 10px;">Filmy i seriale z kategorii: <%= @root_name %> => <%= @category_name %> &dArr;</h3>
+<% end %>
+<%= yield %>
+</div>
+</div>
+<div class="span-3 last">
+<%= render :partial => 'layouts/top_five' %>
+<%= render :partial => 'layouts/five_new' %>
+<%= render :partial => 'layouts/five_comments' %>
+</div>
+<div class="span-24 last">
+<hr id="hr" />
+<center>
+<SCRIPT TYPE="text/javascript" src="http://files.netsales.pl/kody/writeObject.js"></SCRIPT>
+<SCRIPT LANGUAGE=JavaScript>
+var Baner_File="http://files.netsales.pl/programy/374_Bizensfinder/750x100.swf";
+var Baner_FileBase=0;
+var Baner_URL="http://www.biznesfinder.pl/?bid=20687&aid=CD8537&opt=";
+var Baner_Special="?clickTag="+escape(Baner_URL);
+var Baner_Width=750;
+var Baner_Height=100;
+var Baner_Wmode="#FFFFFF";
+var Baner_Fdcdwc=1;
+</SCRIPT>
+<SCRIPT TYPE="text/javascript" src="http://files.netsales.pl/kody/bill.js"></SCRIPT>
+<img src="http://server.netsales.pl/42/8537/20687/" border="0" />
+<hr id="hr" />
+<span style="color: white;text-font: 10px;"><b>Serialowy Świat</b>. Kontakt: info@serialowyswiat.pl </span>
+</center>
+</div>
+</div>
+</body>
+</html>

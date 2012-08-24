@@ -1,0 +1,9 @@
+production:
+  login:
+  password:
+development:
+  login:
+  password:
+test:
+  login:
+  password:

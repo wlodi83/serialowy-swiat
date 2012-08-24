@@ -1,0 +1,15 @@
+<%= div_for comment do %>
+  <% if comment.user.nil? %>
+  <%= image_tag "/images/normal/thumb.png", :class => "user_avatar" %>
+  <span class="comment_name_email"><%= comment.name %> (<%= comment.email %>) said:</span> <br />
+  <span class="comment_body"><%= raw comment.body %></span><br />
+  <span class="comment_date"><%= comment.created_at %></span>
+  <hr id="hr_show"/>
+  <% else %>
+  <%= image_tag comment.user.avatar.url(:thumb), :class => "user_avatar" %>
+  <span class="comment_name_email"><%= link_to comment.user.name, comment.user %> (<%= link_to comment.user.email, comment.user %>) said:</span> <br />
+  <span class="comment_body"><%= raw comment.body %></span><br />
+  <span class="comment_date"><%= comment.created_at %></span> 
+  <hr id="hr_show"/>
+  <% end %>
+<% end %>

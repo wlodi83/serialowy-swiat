@@ -1,0 +1,36 @@
+form.rating_ballot input#rating_submit { display: none; }
+form.rating_ballot input.rating_button { display: none; }
+form.rating_ballot label.rating { cursor: pointer; display: block; height: 16px; width: 16px; float: left;}
+form.rating_ballot label.rating span { display: none; }
+form.rating_ballot label.rating { background-image: url(/images/star-dim.png); }
+form.rating_ballot label.rating.bright { background-image: url(/images/star-bright.png); }
+form.rating_ballot label.rating.glow { background-image: url(/images/star-glow.png); }
+.span-4 .tags {
+margin-top: 20px;
+margin-bottom: 20px;
+}
+.span-4 .tags ul{
+        width: 110px;
+	padding: 5px;
+	text-size: 10px;
+	text-align:center;
+        background:#71b5e9 url(/images/bg_tags.gif) repeat-x;           
+}
+.span-4 .tags li{
+	margin:0;
+	padding:0;
+	list-style:none;
+        display:inline;
+}
+.span-4 .tags li a{
+        text-decoration:none;																		       color:#fff;																			      padding:0 2px;  
+}
+.span-4 .tags li a:hover{       
+       background:none;
+       color:#cff400;
+} 
+ .span-4 .tag1{font-size:100%;}
+ .span-4 .tag2{font-size:110%;}
+ .span-4 .tag3{font-size:120%;}
+ .span-4 .tag4{font-size:130%;}
+ .span-4 .tag5{font-size:150%;}

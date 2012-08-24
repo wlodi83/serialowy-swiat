@@ -1,0 +1,13 @@
+<fieldset style="padding: 5px">
+<legend style="color: white; text-size: 12px;">Ostatnie komentarze</legend>
+<span style="color: white">
+<div style="background-color: #302226; padding: 1px">
+<% i = 1 %>
+<% @five_new_comments.each do |comment| %>
+<%= i %>. "<%= link_to comment.body, comment.video, :style => "color:white;font-family: Cambria, serif;font-size: 14px;font-style: italic;font-weight: normal;text-transform: normal;letter-spacing: normal;line-height: 1.5em;text-decoration: none;" %>"
+<hr style="color: #302226;"/>
+<% i += 1 %>
+<% end %>
+</div>
+</span>
+</fieldset>
