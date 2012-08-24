@@ -7,6 +7,6 @@ class CreateCategoriesYoutubeVideos < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :categories_youtubevideos
+    drop_table :categories_youtube_videos
   end
 end

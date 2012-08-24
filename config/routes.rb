@@ -1,4 +1,12 @@
 SerialowySwiat::Application.routes.draw do
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
+  devise_scope :user do
+    get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
+  end
+
+  root :to => "videos#index"
+
   resources :youtube_videos
   match '/feed' => 'videos#feed', :as => :feed, :defaults => { :format => 'atom' }
   resources :seasons
@@ -9,7 +17,6 @@ SerialowySwiat::Application.routes.draw do
   resources :categories do
     resources :videos
   end
-  devise_for :users
   resources :users, :only => [:index, :show] do
   member do
     get :edit_add_avatar
@@ -23,7 +30,6 @@ SerialowySwiat::Application.routes.draw do
   resources :comments, :only => [:destroy, :index]
   match 'search/query' => 'search#search', :as => 'search'
   match 'search/add_advanced' => 'search#add_advanced', :as => 'add_advanced_search'
-  root :to => "videos#index"
   resources :videos do
     resources :comments
     resources :seasons

@@ -1,7 +1,6 @@
 # encoding: utf-8
 class VideosController < ApplicationController
   layout :choose_layout
-  uses_tiny_mce
   before_filter :authenticate_user!, :only => [:new, :create, :update, :edit, :destroy, :admin, :list_your_video]
   # GET /videos
   # GET /videos.xml
